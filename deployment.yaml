@@ -1,0 +1,29 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: comfyui-deployment
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: comfyui
+  template:
+    metadata:
+      labels:
+        app: comfyui
+    spec:
+      containers:
+      - name: comfyui-container
+        image: comfyanonymous/comfyui:latest
+        ports:
+        - containerPort: 8188  # Port par défaut de ComfyUI
+        resources:
+          limits:
+            nvidia.com/gpu: 1  # Demande une GPU
+        volumeMounts:
+        - name: models-volume
+          mountPath: /content/models  # Chemin où ComfyUI stocke les modèles
+      volumes:
+      - name: models-volume
+        persistentVolumeClaim:
+          claimName: comfyui-models-pvc

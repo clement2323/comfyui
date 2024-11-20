@@ -1,0 +1,12 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: comfyui-service
+spec:
+  selector:
+    app: comfyui
+  ports:
+    - protocol: TCP
+      port: 8080
+      targetPort: 8188
+  type: LoadBalancer  # Ou NodePort selon votre configuration
