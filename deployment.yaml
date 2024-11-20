@@ -15,6 +15,8 @@ spec:
       containers:
       - name: comfyui-container
         image: obeliks/comfyui:sha-ebf5c41-cu121
+        securityContext:
+          runAsUser: 0  # 0 = root
         ports:
         - containerPort: 8188  # Port par défaut de ComfyUI
         resources:
