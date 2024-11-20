@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: comfyui-container
-        image: comfyanonymous/comfyui:latest
+        image: frefrik/comfyui-flux
         ports:
         - containerPort: 8188  # Port par défaut de ComfyUI
         resources:
