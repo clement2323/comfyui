@@ -25,6 +25,45 @@ spec:
         volumeMounts:
         - name: models-volume
           mountPath: /content/models  # Chemin où ComfyUI stocke les modèles
+        env:
+        - name: AWS_S3_ENDPOINT
+          value: minio.lab.sspcloud.fr
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: my-s3-creds
+              key: accessKey
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: my-s3-creds
+              key: secretKey
+      initContainers:
+      - name: minio-init
+        image: minio/mc
+        command:
+        - /bin/sh
+        - -c
+        - |
+          mc alias set s3 https://$AWS_S3_ENDPOINT $AWS_ACCESS_KEY_ID $AWS_SECRET_ACCESS_KEY
+          mkdir -p /content/models/checkpoints
+          mc cp s3/cguillo/model_stable_diff.safetensors /content/models/checkpoints/model.safetensors
+        env:
+        - name: AWS_S3_ENDPOINT
+          value: minio.lab.sspcloud.fr
+        - name: AWS_ACCESS_KEY_ID
+          valueFrom:
+            secretKeyRef:
+              name: sa-secret
+              key: AWS_ACCESS_KEY_ID
+        - name: AWS_SECRET_ACCESS_KEY
+          valueFrom:
+            secretKeyRef:
+              name: sa-secret
+              key: AWS_SECRET_ACCESS_KEY
+        volumeMounts:
+        - name: models-volume
+          mountPath: /content/models  # Monter le volume pour permettre l'accès aux modèles
       volumes:
       - name: models-volume
         persistentVolumeClaim:
