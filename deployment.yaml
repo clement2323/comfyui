@@ -25,19 +25,7 @@ spec:
         volumeMounts:
         - name: models-volume
           mountPath: /content/models  # Chemin où ComfyUI stocke les modèles
-        env:
-        - name: AWS_S3_ENDPOINT
-          value: minio.lab.sspcloud.fr
-        - name: AWS_ACCESS_KEY_ID
-          valueFrom:
-            secretKeyRef:
-              name: my-s3-creds
-              key: accessKey
-        - name: AWS_SECRET_ACCESS_KEY
-          valueFrom:
-            secretKeyRef:
-              name: my-s3-creds
-              key: secretKey
+        
       initContainers:
       - name: minio-init
         image: minio/mc
