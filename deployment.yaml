@@ -24,9 +24,28 @@ spec:
             nvidia.com/gpu: 1  # Demande une GPU
         volumeMounts:
         - name: models-volume
-          mountPath: /app/output/  # Chemin où ComfyUI stocke les modèles
-        
+          mountPath: /app/custom_nodes
+          subPath: custom_nodes_volume
+        - name: models-volume
+          mountPath: /app/output  # Chemin où ComfyUI stocke les modèles
+          subPath: output_volume
       initContainers:
+      # InitContainer pour le clonage des dépôts git
+      - name: git-init
+        image: debian:latest  # Utilise une image Debian
+        command:
+        - /bin/sh
+        - -c
+        - |
+          apt-get update && apt-get install -y git 
+          mkdir -p /app/custom_nodes  # Assure que le répertoire cible existe
+          git clone https://github.com/ltdrdata/ComfyUI-Manager.git /app/custom_nodes/ComfyUI-Manager
+          git clone https://github.com/cubiq/ComfyUI_IPAdapter_plus.git /app/custom_nodes/ComfyUI_IPAdapter_plus
+        volumeMounts:
+        - name: models-volume
+          mountPath: /app/custom_nodes  # Monte le volume pour stocker les fichiers clonés
+          subPath: custom_nodes_volume
+      # InitContainer pour la configuration avec MinIO
       - name: minio-init
         image: minio/mc
         command:
@@ -34,7 +53,7 @@ spec:
         - -c
         - |
           mc alias set s3 https://$AWS_S3_ENDPOINT $AWS_ACCESS_KEY_ID $AWS_SECRET_ACCESS_KEY
-          mkdir -p /app/output/checkpoints 
+          mkdir -p /app/output/checkpoints
           mc cp s3/cguillo/model_stable_diff.safetensors /app/output/checkpoints/model.safetensors
         env:
         - name: AWS_S3_ENDPOINT
@@ -51,7 +70,8 @@ spec:
               key: AWS_SECRET_ACCESS_KEY
         volumeMounts:
         - name: models-volume
-          mountPath: /app/output/  # Monter le volume pour permettre l'accès aux modèles
+          mountPath: /app/output  # Monte le volume pour accéder aux modèles
+          subPath: output_volume
       volumes:
       - name: models-volume
         persistentVolumeClaim:
