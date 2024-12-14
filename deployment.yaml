@@ -25,10 +25,13 @@ spec:
         volumeMounts:
         - name: models-volume
           mountPath: /app/custom_nodes
-          subPath: custom_nodes_volume
+          subPath: custom_nodes_paths
         - name: models-volume
           mountPath: /app/output  # Chemin où ComfyUI stocke les modèles
-          subPath: output_volume
+          subPath: models_paths
+        - name: configs
+          mountPath: /app/extra_model_paths.yaml
+          subPath: extra_model_paths.yaml
       initContainers:
       # InitContainer pour le clonage des dépôts git
       - name: git-init
@@ -44,7 +47,7 @@ spec:
         volumeMounts:
         - name: models-volume
           mountPath: /app/custom_nodes  # Monte le volume pour stocker les fichiers clonés
-          subPath: custom_nodes_volume
+          subPath: custom_nodes_paths
       # InitContainer pour la configuration avec MinIO
       - name: minio-init
         image: minio/mc
@@ -53,10 +56,9 @@ spec:
         - -c
         - |
           mc alias set s3 https://$AWS_S3_ENDPOINT $AWS_ACCESS_KEY_ID $AWS_SECRET_ACCESS_KEY
-          mkdir -p /app/output/checkpoints
-          mc cp s3/cguillo/model_stable_diff.safetensors /app/output/checkpoints/model.safetensors
-          mc cp s3/cguillo/ip-adapter-full-face_sd15.safetensors /app/output/ipadapter/ip-adapter-full-face_sd15.safetensors
-          
+          mkdir -p /app/models/checkpoints
+          mc cp s3/cguillo/model_stable_diff.safetensors /app/models/checkpoints/model.safetensors
+         
         env:
         - name: AWS_S3_ENDPOINT
           value: minio.lab.sspcloud.fr
@@ -72,9 +74,13 @@ spec:
               key: AWS_SECRET_ACCESS_KEY
         volumeMounts:
         - name: models-volume
-          mountPath: /app/output  # Monte le volume pour accéder aux modèles
-          subPath: output_volume
+          mountPath: /app/models  # Monte le volume pour accéder aux modèles
+          subPath: models_path
       volumes:
       - name: models-volume
         persistentVolumeClaim:
           claimName: comfyui-models-pvc
+          volumes:
+      - name: configs
+        configMap:
+          name: vol-config-extra-models-paths

@@ -1,0 +1,21 @@
+apiVersion: v1
+data:
+   extra_model_paths.yaml: |
+    comfyui:
+        base_path: app/
+        is_default: true
+        checkpoints: models/checkpoints/
+        clip: models/clip/
+        clip_vision: models/clip_vision/
+        configs: models/configs/
+        controlnet: models/controlnet/
+        diffusion_models: |
+                    models/diffusion_models
+                    models/unet
+        embeddings: models/embeddings/
+        loras: models/loras/
+        upscale_models: models/upscale_models/
+        vae: models/vae/
+kind: ConfigMap
+metadata:
+  name: vol-config-extra-models-paths
