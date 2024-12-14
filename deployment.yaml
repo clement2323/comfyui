@@ -74,6 +74,9 @@ spec:
           if [ ! -f /app/models/checkpoints/sdXL.safetensors ]; then
             mc cp s3/cguillo/sdXL.safetensors /app/models/checkpoints/sdXL.safetensors
           fi
+          if [ ! -f /app/models/loras/RMSDXL_Photo.safetensors ]; then
+            mc cp s3/cguillo/RMSDXL_Photo.safetensors /app/models/loras/RMSDXL_Photo.safetensors
+          fi
                 
          
         env:

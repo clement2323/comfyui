@@ -1,5 +1,7 @@
+kubectl cp RMSDXL_Photo.safetensors comfyui-deployment-5c444bcf7b-mf9hb:/app/models/loras/RMSDXL_Photo.safetensors
  
- install insoght face onngx etc..
+
+
 command:
         - /bin/sh
         - -c
