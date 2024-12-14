@@ -55,6 +55,8 @@ spec:
           mc alias set s3 https://$AWS_S3_ENDPOINT $AWS_ACCESS_KEY_ID $AWS_SECRET_ACCESS_KEY
           mkdir -p /app/output/checkpoints
           mc cp s3/cguillo/model_stable_diff.safetensors /app/output/checkpoints/model.safetensors
+          mc cp s3/cguillo/ip-adapter-full-face_sd15.safetensors /app/output/ipadapter/ip-adapter-full-face_sd15.safetensors
+          
         env:
         - name: AWS_S3_ENDPOINT
           value: minio.lab.sspcloud.fr
