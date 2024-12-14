@@ -27,8 +27,8 @@ spec:
           mountPath: /app/custom_nodes
           subPath: custom_nodes_paths
         - name: models-volume
-          mountPath: /app/output  # Chemin où ComfyUI stocke les modèles
-          subPath: models_paths
+          mountPath: /app/models  # Chemin où ComfyUI stocke les modèles
+          subPath: models_path
         - name: configs
           mountPath: /app/extra_model_paths.yaml
           subPath: extra_model_paths.yaml
