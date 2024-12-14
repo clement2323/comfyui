@@ -58,6 +58,8 @@ spec:
           mc alias set s3 https://$AWS_S3_ENDPOINT $AWS_ACCESS_KEY_ID $AWS_SECRET_ACCESS_KEY
           mkdir -p /app/models/checkpoints
           mc cp s3/cguillo/model_stable_diff.safetensors /app/models/checkpoints/model.safetensors
+          mc cp s3/cguillo/flux_dev.safetensors /app/models/checkpoints/flux_dev.safetensors
+         
          
         env:
         - name: AWS_S3_ENDPOINT
