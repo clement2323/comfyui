@@ -1,6 +1,8 @@
 kubectl cp RMSDXL_Photo.safetensors comfyui-deployment-5c444bcf7b-mf9hb:/app/models/loras/RMSDXL_Photo.safetensors
 kubectl cp realismEngineSDXL_v30VAE.safetensors comfyui-deployment-5c444bcf7b-mf9hb:/app/models/checkpoints/realismEngineSDXL_v30VAE.safetensors
- 
+kubectl cp analogMadness_v70.safetensors comfyui-deployment-5c444bcf7b-mf9hb:/app/models/checkpoints/analogMadness_v70.safetensors
+
+ mc cp s3/cguillo/
 
 command:
         - /bin/sh
