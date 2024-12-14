@@ -14,6 +14,7 @@ spec:
     spec:
       containers:
       - name: comfyui-container
+        
         image: obeliks/comfyui:sha-ebf5c41-cu121
         securityContext:
           runAsUser: 0  # 0 = root
@@ -42,8 +43,18 @@ spec:
         - |
           apt-get update && apt-get install -y git 
           mkdir -p /app/custom_nodes  # Assure que le répertoire cible existe
-          git clone https://github.com/ltdrdata/ComfyUI-Manager.git /app/custom_nodes/ComfyUI-Manager
-          git clone https://github.com/cubiq/ComfyUI_IPAdapter_plus.git /app/custom_nodes/ComfyUI_IPAdapter_plus
+          if [ ! -d "/app/custom_nodes/ComfyUI-Manager" ]; then
+            git clone https://github.com/ltdrdata/ComfyUI-Manager.git /app/custom_nodes/ComfyUI-Manager
+          else
+            echo "ComfyUI-Manager existe déjà, pas besoin de cloner."
+          fi
+          
+          if [ ! -d "/app/custom_nodes/ComfyUI_IPAdapter_plus" ]; then
+            git clone https://github.com/cubiq/ComfyUI_IPAdapter_plus.git /app/custom_nodes/ComfyUI_IPAdapter_plus
+          else
+            echo "ComfyUI_IPAdapter_plus existe déjà, pas besoin de cloner."
+          fi
+        
         volumeMounts:
         - name: models-volume
           mountPath: /app/custom_nodes  # Monte le volume pour stocker les fichiers clonés
@@ -57,9 +68,13 @@ spec:
         - |
           mc alias set s3 https://$AWS_S3_ENDPOINT $AWS_ACCESS_KEY_ID $AWS_SECRET_ACCESS_KEY
           mkdir -p /app/models/checkpoints
-          mc cp s3/cguillo/model_stable_diff.safetensors /app/models/checkpoints/model.safetensors
-          mc cp s3/cguillo/flux_dev.safetensors /app/models/checkpoints/flux_dev.safetensors
-         
+          if [ ! -f /app/models/checkpoints/sd15.safetensors ]; then
+            mc cp s3/cguillo/sd15.safetensors /app/models/checkpoints/sd15.safetensors
+          fi
+          if [ ! -f /app/models/checkpoints/sdXL.safetensors ]; then
+            mc cp s3/cguillo/sdXL.safetensors /app/models/checkpoints/sdXL.safetensors
+          fi
+                
          
         env:
         - name: AWS_S3_ENDPOINT
