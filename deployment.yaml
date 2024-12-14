@@ -77,6 +77,12 @@ spec:
           if [ ! -f /app/models/loras/RMSDXL_Photo.safetensors ]; then
             mc cp s3/cguillo/RMSDXL_Photo.safetensors /app/models/loras/RMSDXL_Photo.safetensors
           fi
+          if [ ! -f /app/models/checkpoints/realismEngineSDXL_v30VAE.safetensors ]; then
+            mc cp s3/cguillo/realismEngineSDXL_v30VAE.safetensors /app/models/checkpoints/realismEngineSDXL_v30VAE.safetensors
+          fi
+
+          
+
                 
          
         env:

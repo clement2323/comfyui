@@ -1,6 +1,6 @@
 kubectl cp RMSDXL_Photo.safetensors comfyui-deployment-5c444bcf7b-mf9hb:/app/models/loras/RMSDXL_Photo.safetensors
+kubectl cp realismEngineSDXL_v30VAE.safetensors comfyui-deployment-5c444bcf7b-mf9hb:/app/models/checkpoints/realismEngineSDXL_v30VAE.safetensors
  
-
 
 command:
         - /bin/sh
