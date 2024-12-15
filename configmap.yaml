@@ -18,9 +18,9 @@ data:
         upscale_models: models/upscale_models/
         vae: models/vae/
         unet: | 
-          models/unet
-          models/checkpoints
-        instantid: models/ipadapter
+          models/unet/
+          models/checkpoints/
+       
 kind: ConfigMap
 metadata:
   name: vol-config-extra-models-paths

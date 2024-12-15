@@ -1,3 +1,6 @@
+#Petit warning, ne pas rerouter les repertoire ipadapter et instantid dans les extra config paths, ça fout le bordel, ne rerouter que les "classiques" vers app/models (sinon ça cherche dans output)
+# Par la suite les installations vont directement taper au bon endroit (models/ipadapter et models/instantid)
+
 kubectl cp RMSDXL_Photo.safetensors comfyui-deployment-5c444bcf7b-mf9hb:/app/models/loras/RMSDXL_Photo.safetensors
 kubectl cp realismEngineSDXL_v30VAE.safetensors comfyui-deployment-5c444bcf7b-mf9hb:/app/models/checkpoints/realismEngineSDXL_v30VAE.safetensors
 kubectl cp analogMadness_v70.safetensors comfyui-deployment-5c444bcf7b-mf9hb:/app/models/checkpoints/analogMadness_v70.safetensors
