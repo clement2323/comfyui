@@ -80,7 +80,9 @@ spec:
           if [ ! -f /app/models/checkpoints/realismEngineSDXL_v30VAE.safetensors ]; then
             mc cp s3/cguillo/realismEngineSDXL_v30VAE.safetensors /app/models/checkpoints/realismEngineSDXL_v30VAE.safetensors
           fi
-
+          if [ ! -f /app/models/checkpoints/realvisxlV50_v50Bakedvae.safetensors ]; then
+            mc cp s3/cguillo/realvisxlV50_v50Bakedvae.safetensors /app/models/checkpoints/realvisxlV50_v50Bakedvae.safetensors
+          fi
           
 
                 
