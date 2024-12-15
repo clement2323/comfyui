@@ -7,7 +7,15 @@ kubectl cp realismEngineSDXL_v30VAE.safetensors comfyui-deployment-5c444bcf7b-mf
 kubectl cp analogMadness_v70.safetensors comfyui-deployment-5c444bcf7b-mf9hb:/app/models/checkpoints/analogMadness_v70.safetensors
 kubectl cp realvisxlV50_v50Bakedvae.safetensors comfyui-deployment-7b9c4f8699-2h9tg:/app/models/checkpoints/realvisxlV50_v50Bakedvae.safetensors
 
-# pour ipadapterplus install requirements of ipadapter custom nodes puis pip install --upgrade albumentations
+# POUR JOUER AVEC IPADAPTERPLUS !!!
+pip ugrade textstyle je sais plus quoi
+pip install albumentations==1.1.0
+pip install --upgrade typing_extensions
+pip install --upgrade albumentations
+pip install --upgrade pydantic
+find . -name "__pycache__" -exec rm -rf {} +
+#AND RESTART
+
 command:
         - /bin/sh
         - -c
