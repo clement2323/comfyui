@@ -17,6 +17,10 @@ data:
         loras: models/loras/
         upscale_models: models/upscale_models/
         vae: models/vae/
+        unet: | 
+          models/unet
+          models/checkpoints
+        instantid: models/ipadapter
 kind: ConfigMap
 metadata:
   name: vol-config-extra-models-paths
