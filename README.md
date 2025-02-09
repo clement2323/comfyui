@@ -24,8 +24,8 @@ This repository contains Kubernetes manifests and configuration files to deploy 
 
 ## Quick Start
 
-git clone https://github.com/clement2323/comfyui.git
-cd cmfyui 
+git clone https://github.com/clement2323/comfyui.git //
+cd cmfyui //
 kubectl apply -f .
 
 ![demo](comfyui.png)
