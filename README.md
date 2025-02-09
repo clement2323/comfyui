@@ -10,17 +10,13 @@ This repository contains Kubernetes manifests and configuration files to deploy 
 
 - 🚀 Production-ready Kubernetes deployment
 - 💾 Persistent storage configuration
-- 🔒 Security best practices
 - 🔧 Resource management
-- 📊 Monitoring setup
 
 ## Prerequisites
 
-- Kubernetes cluster (1.18+)
+- Kubernetes cluster 
 - kubectl configured to communicate with your cluster
-- Helm 3.0+
 - Storage class available in your cluster
-- NVIDIA GPU support (optional but recommended)
 
 ## Quick Start
 
