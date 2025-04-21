@@ -68,25 +68,22 @@ spec:
         - |
           mc alias set s3 https://$AWS_S3_ENDPOINT $AWS_ACCESS_KEY_ID $AWS_SECRET_ACCESS_KEY
           mkdir -p /app/models/checkpoints
-          if [ ! -f /app/models/checkpoints/sd15.safetensors ]; then
-            mc cp s3/cguillo/sd15.safetensors /app/models/checkpoints/sd15.safetensors
-          fi
+          # if [ ! -f /app/models/checkpoints/sd15.safetensors ]; then
+          #   mc cp s3/cguillo/sd15.safetensors /app/models/checkpoints/sd15.safetensors
+          # fi
           if [ ! -f /app/models/checkpoints/sdXL.safetensors ]; then
             mc cp s3/cguillo/sdXL.safetensors /app/models/checkpoints/sdXL.safetensors
           fi
-          if [ ! -f /app/models/loras/RMSDXL_Photo.safetensors ]; then
-            mc cp s3/cguillo/RMSDXL_Photo.safetensors /app/models/loras/RMSDXL_Photo.safetensors
-          fi
-          if [ ! -f /app/models/checkpoints/realismEngineSDXL_v30VAE.safetensors ]; then
-            mc cp s3/cguillo/realismEngineSDXL_v30VAE.safetensors /app/models/checkpoints/realismEngineSDXL_v30VAE.safetensors
-          fi
-          if [ ! -f /app/models/checkpoints/realvisxlV50_v50Bakedvae.safetensors ]; then
-            mc cp s3/cguillo/realvisxlV50_v50Bakedvae.safetensors /app/models/checkpoints/realvisxlV50_v50Bakedvae.safetensors
-          fi
+          # if [ ! -f /app/models/loras/RMSDXL_Photo.safetensors ]; then
+          #   mc cp s3/cguillo/RMSDXL_Photo.safetensors /app/models/loras/RMSDXL_Photo.safetensors
+          # fi
+          # if [ ! -f /app/models/checkpoints/realismEngineSDXL_v30VAE.safetensors ]; then
+          #   mc cp s3/cguillo/realismEngineSDXL_v30VAE.safetensors /app/models/checkpoints/realismEngineSDXL_v30VAE.safetensors
+          # fi
+          # if [ ! -f /app/models/checkpoints/realvisxlV50_v50Bakedvae.safetensors ]; then
+          #   mc cp s3/cguillo/realvisxlV50_v50Bakedvae.safetensors /app/models/checkpoints/realvisxlV50_v50Bakedvae.safetensors
+          # fi
           
-
-                
-         
         env:
         - name: AWS_S3_ENDPOINT
           value: minio.lab.sspcloud.fr
